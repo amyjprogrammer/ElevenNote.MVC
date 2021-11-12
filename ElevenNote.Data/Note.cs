@@ -19,6 +19,7 @@ namespace ElevenNote.Data
         public string Title { get; set; }
 
         [Required]
+        [Display(Name ="Your Note")]
         public string Content { get; set; }
 
         [Required]
