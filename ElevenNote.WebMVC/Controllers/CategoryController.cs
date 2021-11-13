@@ -87,5 +87,25 @@ namespace ElevenNote.WebMVC.Controllers
             ModelState.AddModelError("", "Your category could not be updated.");
             return View(model);
         }
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var service = new CategoryService();
+            var model = service.GetCategoryById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = new CategoryService();
+            service.DeleteCategory(id);
+            TempData["SaveResult"] = "Your category was deleted.";
+            return RedirectToAction("Index");
+        }
     }
 }
