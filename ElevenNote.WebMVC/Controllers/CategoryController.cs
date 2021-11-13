@@ -1,4 +1,5 @@
 ﻿using ElevenNote.Models.Category;
+using ElevenNote.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace ElevenNote.WebMVC.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            var model = new CategoryListItem[0];
+            var service = new CategoryService();
+            var model = service.GetCategories();
             return View(model);
         }
 
@@ -30,7 +32,11 @@ namespace ElevenNote.WebMVC.Controllers
         {
             if (!ModelState.IsValid) { return View(model); }
 
-            return View(model);
+            var service = new CategoryService();
+
+            service.CreateCategory(model);
+
+            return RedirectToAction("Index");
         }
     }
 }
