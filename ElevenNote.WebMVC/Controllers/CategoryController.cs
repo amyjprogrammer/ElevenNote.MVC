@@ -30,13 +30,18 @@ namespace ElevenNote.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CategoryCreate model)
         {
-            if (!ModelState.IsValid) { return View(model); }
+            if (!ModelState.IsValid) return View(model);
 
             var service = new CategoryService();
 
-            service.CreateCategory(model);
+            if (service.CreateCategory(model))
+            {
+                TempData["SaveResult"] = "Your category was created.";
+                return RedirectToAction("Index");
+            };
 
-            return RedirectToAction("Index");
+            ModelState.AddModelError("", "Note could not be created.");
+            return View(model);
         }
     }
 }
