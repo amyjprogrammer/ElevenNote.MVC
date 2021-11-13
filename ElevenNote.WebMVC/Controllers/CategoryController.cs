@@ -40,7 +40,7 @@ namespace ElevenNote.WebMVC.Controllers
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "Note could not be created.");
+            ModelState.AddModelError("", "Category could not be created.");
             return View(model);
         }
 
@@ -62,6 +62,29 @@ namespace ElevenNote.WebMVC.Controllers
                     CategoryId = detail.CategoryId,
                     Name = detail.Name
                 };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, CategoryEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if(model.CategoryId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = new CategoryService();
+            if (service.UpdateCategory(model))
+            {
+                TempData["SaveResult"] = "Your category was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your category could not be updated.");
             return View(model);
         }
     }
