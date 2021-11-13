@@ -63,5 +63,21 @@ namespace ElevenNote.Services
                     };
             }
         }
+
+        public bool UpdateCategory(CategoryEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Categories
+                    .Single(e => e.CategoryId == model.CategoryId);
+
+                entity.Name = model.Name;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

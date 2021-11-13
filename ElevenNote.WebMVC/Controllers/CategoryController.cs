@@ -51,5 +51,18 @@ namespace ElevenNote.WebMVC.Controllers
 
             return View(model);
         }
+
+        public ActionResult Edit(int id)
+        {
+            var service = new CategoryService();
+            var detail = service.GetCategoryById(id);
+            var model =
+                new CategoryEdit
+                {
+                    CategoryId = detail.CategoryId,
+                    Name = detail.Name
+                };
+            return View(model);
+        }
     }
 }
