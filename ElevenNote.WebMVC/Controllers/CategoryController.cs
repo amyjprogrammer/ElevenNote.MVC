@@ -16,5 +16,21 @@ namespace ElevenNote.WebMVC.Controllers
             var model = new CategoryListItem[0];
             return View(model);
         }
+
+        //Get
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //Post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CategoryCreate model)
+        {
+            if (!ModelState.IsValid) { return View(model); }
+
+            return View(model);
+        }
     }
 }
