@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category\CategoryListItem.cs" />
     <Compile Include="Note\NoteCreate.cs" />
     <Compile Include="Note\NoteDetail.cs" />
     <Compile Include="Note\NoteEdit.cs" />
@@ -64,8 +65,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Category\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
